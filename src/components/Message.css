@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.message {
+    width: 886px;
+    border-radius: 1px;
+    padding: 10px;
+    border: 1px grey solid;
+    margin: 20px 0;
+}
+
+.messageHeader {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+}
+
+.messageAuthor {
+    display: flex;
+    color: #808080;
+    width: 264px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    margin-right: 10px;
+}
+
+.authorName {
+    font-size: 16px;
+}
+
+.authorChannel {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.sideButtons {
+    display: flex;
+    padding: 0px;
+    width: 212px;
+    height: 28px;
+}
+
+.sideButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    top: 0px;
+    border: 1px solid #0088EE;
+    border-radius: 2px;
+    color: #0088EE;
+    font-size: 11px;
+    font-family: 'Roboto', sans-serif;
+    width: 64px;
+    margin-right: 10px;
+    transition: background-color 1s, color 1s;
+}
+
+.sideButton:hover {
+    cursor: pointer;
+    background-color: #0088EE;
+    color: #FFF;
+}
+
+.sideButton:last-child {
+    margin-right: 0;
+}
+
+.icons {
+    margin-left: 26px;
+    display: flex;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+    transition: background-color 1s, color 1s;
+    cursor: pointer;
+}
+
+.icon:last-child {
+    margin-right: 0;
+}
+
+.messageBody {
+    width: 856px;
+    display: flex;
+    margin-top: 9px;
+    margin-bottom: 7px;
+}
+
+.messageDate {
+    color: #808080;
+    margin-right: 10px;
+}
+
+.messageContent {
+    font-size: 16px;
+    color: #333333;
+    width: 810px;
+}
+
+.nextButton {
+    margin: 8px 0;
+    color: #808080;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.nextButton:hover {
+    text-decoration: underline;
+}
+
+.messageHashtags {
+    display: flex;
+    color: #CDCDCD;
+    font-size: 12px;
+    bottom: 11px;
+}
+
+.messageHashtag {
+    margin-right: 8px;
+}
+
+.messageHashtag:last-child {
+    margin-right: 0;
+}
+

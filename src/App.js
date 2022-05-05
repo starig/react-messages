@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Message from "./components/Message";
 
+
 function App(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
+    const [order, setOrder] = useState('default');
     const formData = new FormData();
     let lastMessageId = 0;
     formData.append('actionName', 'MessagesLoad');
@@ -55,19 +57,43 @@ function App(props) {
     }, []);
 
 
+    function orderStatusSwitch () {
+        if (order === 'default') {
+            setOrder('reversed');
+        } else if (order === 'reversed'){
+            setOrder('default');
+        }
+    }
+
 
     if (error) {
         return <div>Error: {error.message} </div>
     } else if (!isLoaded) {
         return <div>Loading...</div>
-    } else {
+    } else if (order === 'default') {
         return (
             <div>
-                {/*<div className={'orderToggle'}>
-                    <button onClick={toggleMessagesOrder}>Toggle</button>
-                </div>*/}
+                <div className={'orderToggle'}>
+                    <button onClick={orderStatusSwitch}>Toggle</button>
+                </div>
                 {items.Messages.map(item => (
+                    <Message item={item} />
+                ))}
+                {/*{orderStatus === 'default' ? items.Messages.map(item => (
                     <Message item={item}/>
+                )) : [...items.Messages].reverse().map(item => (
+                    <Message item={item} />
+                ))}*/}
+            </div>
+        )
+    } else if (order === 'reversed') {
+        return (
+            <div>
+                <div className={'orderToggle'}>
+                    <button onClick={orderStatusSwitch}>Toggle</button>
+                </div>
+                {[...items.Messages].reverse().map(item => (
+                    <Message item={item} />
                 ))}
             </div>
         )

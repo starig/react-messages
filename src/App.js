@@ -58,10 +58,10 @@ function App(props) {
     }, []);
 
 
-    function orderStatusSwitch () {
+    function orderStatusSwitch() {
         if (order === 'default') {
             setOrder('reversed');
-        } else if (order === 'reversed'){
+        } else if (order === 'reversed') {
             setOrder('default');
         }
     }
@@ -73,34 +73,30 @@ function App(props) {
         return <div>Loading...</div>
     } else if (order === 'default') {
         return (
-            <HashRouter basename={process.env.PUBLIC_URL}>
-                <div>
-                    <div className={'orderToggle'}>
-                        <button onClick={orderStatusSwitch}>Toggle</button>
-                    </div>
-                    {items.Messages.map(item => (
-                        <Message item={item} />
-                    ))}
-                    {/*{orderStatus === 'default' ? items.Messages.map(item => (
+            <div>
+                <div className={'orderToggle'}>
+                    <button onClick={orderStatusSwitch}>Toggle</button>
+                </div>
+                {items.Messages.map(item => (
+                    <Message item={item}/>
+                ))}
+                {/*{orderStatus === 'default' ? items.Messages.map(item => (
                     <Message item={item}/>
                 )) : [...items.Messages].reverse().map(item => (
                     <Message item={item} />
                 ))}*/}
-                </div>
-            </HashRouter>
+            </div>
         )
     } else if (order === 'reversed') {
         return (
-            <HashRouter basename={process.env.PUBLIC_URL}>
-                <div>
-                    <div className={'orderToggle'}>
-                        <button onClick={orderStatusSwitch}>Toggle</button>
-                    </div>
-                    {[...items.Messages].reverse().map(item => (
-                        <Message item={item} />
-                    ))}
+            <div>
+                <div className={'orderToggle'}>
+                    <button onClick={orderStatusSwitch}>Toggle</button>
                 </div>
-            </HashRouter>
+                {[...items.Messages].reverse().map(item => (
+                    <Message item={item}/>
+                ))}
+            </div>
         )
     }
 }

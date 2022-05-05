@@ -80,11 +80,6 @@ function App(props) {
                 {items.Messages.map(item => (
                     <Message item={item}/>
                 ))}
-                {/*{orderStatus === 'default' ? items.Messages.map(item => (
-                    <Message item={item}/>
-                )) : [...items.Messages].reverse().map(item => (
-                    <Message item={item} />
-                ))}*/}
             </div>
         )
     } else if (order === 'reversed') {

@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Message from "./components/Message";
-import {HashRouter} from 'react-router-dom';
 
 
-function App(props) {
+function App() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [order, setOrder] = useState('default');
+    const [ids, setFavorite] = useState( () => {
+        const localData = localStorage.getItem('ids');
+        return localData ? JSON.parse(localData) : []
+    });
     const formData = new FormData();
     let lastMessageId = 0;
     formData.append('actionName', 'MessagesLoad');
@@ -66,30 +69,51 @@ function App(props) {
         }
     }
 
+    useEffect(() => {
+        localStorage.setItem('ids', JSON.stringify(ids))
+    }, [ids]);
+    useEffect(handleFavorite, []);
+    function handleFavorite(currentId) {
+        if (!ids.includes(currentId)) {
+            const temp = [...ids];
+            temp.push(currentId);
+            setFavorite(temp);
+        } else if (ids.includes(currentId)){
+            const temp = [...ids];
+            const removingId = temp.indexOf(currentId);
+            temp.splice(removingId, 1);
+            setFavorite(temp);
+        }
+    }
+
+
+
 
     if (error) {
         return <div>Error: {error.message} </div>
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else if (order === 'default') {
+        console.log(ids)
         return (
             <div>
                 <div className={'orderToggle'}>
                     <button onClick={orderStatusSwitch}>Toggle</button>
                 </div>
-                {items.Messages.map(item => (
-                    <Message item={item}/>
+                {items.Messages.map((item, idx) => (
+                    <Message key={idx} item={item} favoriteList={ids} handleFavoriteFunction={handleFavorite}/>
                 ))}
             </div>
         )
     } else if (order === 'reversed') {
+        console.log(ids)
         return (
             <div>
                 <div className={'orderToggle'}>
                     <button onClick={orderStatusSwitch}>Toggle</button>
                 </div>
-                {[...items.Messages].reverse().map(item => (
-                    <Message item={item}/>
+                {[...items.Messages].reverse().map((item, idx) => (
+                    <Message key={idx} item={item} favoriteList={ids} handleFavoriteFunction={handleFavorite}/>
                 ))}
             </div>
         )

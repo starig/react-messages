@@ -9,20 +9,26 @@ import sendMessageImg from './img/sendMessage.png'
 import settingsImg from './img/settings.png'
 
 
-
-
 function Message(props) {
-    let attachmentContent = <img width={'259'} controls height={'146'} src={noImage} />;
+    let attachmentContent = <img alt={'img'} width={'259'} controls height={'146'} src={noImage}/>;
     if (props.item.attachments.length !== 0) {
         let attachmentType = props.item.attachments[0].type;
         let attachmentUrl = props.item.attachments[0].url;
         switch (attachmentType) {
             case 'image':
-                attachmentContent = <img width={'259'} controls height={'146'} src={attachmentUrl} />
+                attachmentContent = <img alt={'img'} width={'259'} controls height={'146'} src={attachmentUrl}/>
                 break;
             case 'video':
                 attachmentContent = <video width={'259'} controls height={'146'} src={attachmentUrl}></video>
         }
+    }
+
+    let favoriteButton;
+
+    if (props.favoriteList.includes(props.item.id)) {
+        favoriteButton = <img src={favoriteOn} alt="" className="iconImg"/>
+    } else if (!props.favoriteList.includes(props.item.id)) {
+        favoriteButton = <img src={favoriteOff} alt="" className="iconImg"/>
     }
 
     return (
@@ -49,8 +55,8 @@ function Message(props) {
                     <div className="icon">
                         <img src={settingsImg} alt="" className="iconImg"/>
                     </div>
-                    <div className="icon">
-                        <img src={favoriteOff} alt="" className="iconImg"/>
+                    <div className="icon" onClick={() => props.handleFavoriteFunction(props.item.id)}>
+                        {favoriteButton}
                     </div>
                 </div>
             </div>
